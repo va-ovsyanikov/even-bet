@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import { layoutMiddleware } from '@/router/loadLayout.middleware'
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView,
     meta: { layout: 'main', auth: true }
@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
   if (requireAuth && !isAuthorization) {
     next('/auth')
   } else if (!requireAuth && isAuthorization) {
-    next('/')
+    next('/home')
   } else {
     next()
   }

@@ -1,5 +1,4 @@
 <template>
-  sdfsdf
   <router-view></router-view>
 </template>
 

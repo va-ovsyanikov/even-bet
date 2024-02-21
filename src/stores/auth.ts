@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', {
         if (response) {
           const token: string = response.data[0].attributes.token
           localStorage.setItem('token', token)
-          axios.defaults.headers.common['Authorization'] = token
+          // axios.defaults.headers.common['Authorization'] = token
           router.push({name:'home'})
           notify({
             type: 'success',

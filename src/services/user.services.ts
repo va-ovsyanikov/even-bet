@@ -3,5 +3,5 @@ import type { IAuthParams } from '@/interface/auth.interface'
 import { EApiURL, EApiMethods } from '@/enums/enums.api'
 import type { IRequest } from '@/interface/common.interface'
 
-export const authentication = (body: IAuthParams) =>
-  request({ url: EApiURL.authentication, method: EApiMethods.POST, body } as unknown as IRequest<IAuthParams>)
+export const userFetch = () =>
+  request({ url: EApiURL.games, method: EApiMethods.GET } as unknown as IRequest<IAuthParams>)
