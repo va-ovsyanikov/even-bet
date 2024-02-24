@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-import { authentication } from '@/services/auth.services'
+import { authentication } from '@/services'
 import { notify } from '@kyvg/vue3-notification'
 import { setLocalStorage, getLocalStorage } from '@/utils/functions.utils'
 import type { IAuthParams, IJwtToken } from '@/interfaces'

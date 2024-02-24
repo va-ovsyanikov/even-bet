@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { gamesFetch, gameIdFetch } from '@/services/game.services'
+import { gamesFetch, gameIdFetch } from '@/services'
 import { notify } from '@kyvg/vue3-notification'
 import type { IGameIdParams } from '@/interfaces'
 

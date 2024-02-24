@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { userFetch } from '@/services/user.services'
+import { userFetch } from '@/services'
 import { notify } from '@kyvg/vue3-notification'
 
 export const useUserStore = defineStore('user', {
