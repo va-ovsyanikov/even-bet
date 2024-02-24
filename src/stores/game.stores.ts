@@ -32,8 +32,5 @@ export const useGameStore = defineStore('game', {
         })
       }
     }
-  },
-  getters: {
-    getGameLink: (state) => state.gameLink
   }
 })

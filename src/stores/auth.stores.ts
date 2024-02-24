@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-import { authentication } from '@/services'
+import { authentication, refreshToken } from '@/services'
 import { notify } from '@kyvg/vue3-notification'
 import { setLocalStorage, getLocalStorage } from '@/utils/functions.utils'
-import type { IAuthParams, IJwtToken } from '@/interfaces'
-import { ELocalStorages } from '@/enums'
+import type { IAuthParams, IJwtToken, IRefreshTokenParams } from '@/interfaces'
+import { ELocalStoragesName } from '@/enums'
+import { useUserStore } from '@/stores'
 
 export const useAuthStore = defineStore('auth', {
   actions: {
@@ -12,13 +13,12 @@ export const useAuthStore = defineStore('auth', {
       try {
         const response = await authentication(params)
         if (response) {
-          // const token: IJwtToken = response.data[0].attributes.token
           setLocalStorage('token', response.data[0].attributes.token as IJwtToken)
           setLocalStorage(
             'refresh-token',
             response.data[0].attributes['refresh-token'] as IJwtToken
           )
-          setLocalStorage('life-time', response.data[0].attributes['life-time'])
+          setLocalStorage('life-time', (response.data[0].attributes['life-time'] - 100) as number)
           // axios.defaults.headers.common['Authorization'] = token
           router.push({ name: 'home' })
           notify({
@@ -27,17 +27,39 @@ export const useAuthStore = defineStore('auth', {
           })
         }
       } catch (errors: any) {
-        console.log(errors)
         notify({
           type: 'error',
           title: 'Access is denied'
         })
       }
     },
-    async refreshToken(token: IJwtToken) {
-      +getLocalStorage(ELocalStorages.lifeTime) !== 0 &&
-      +getLocalStorage(ELocalStorages.lifeTime) * 1000 < new Date().getTime() + 3600000
+    async checkToken() {
+      try {
+        const refreshToken = getLocalStorage(ELocalStoragesName.refreshToken)
+        const params: IRefreshTokenParams = {
+          clientId: 'default',
+          refreshToken: refreshToken
+        }
+        const response = await refreshToken(params)
+        if (response) {
+          setLocalStorage('token', response.data[0].attributes.token as IJwtToken)
+          setLocalStorage(
+            'refresh-token',
+            response.data[0].attributes['refresh-token'] as IJwtToken
+          )
+          setLocalStorage('life-time', (response.data[0].attributes['life-time'] - 100) as number)
+          const store = useUserStore()
+          const { userDataFetch } = store
+          // await userDataFetch()
+        }
+      } catch (error) {
+        notify({
+          type: 'error',
+          title: 'Access is denied'
+        })
+      }
 
+      // }
     }
 
     // const count = ref(0)

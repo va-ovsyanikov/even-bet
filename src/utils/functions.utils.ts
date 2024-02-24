@@ -12,7 +12,6 @@ export const getDynamicUrl = (url: string, params: string[] = []): string => {
  * @param {string[]} values - Массив значений для замены
  * */
 function replaceValues(str: string, values: string[]): string {
-  console.log(values)
   return str.replace(/\$(\d+)/g, (_, index) => values[index - 1] || '')
 }
 /**

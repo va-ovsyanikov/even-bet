@@ -1,4 +1,4 @@
-export  type { IAuthParams, IJwtToken } from '@/interfaces/auth.interface'
-export  type { IGameIdParams } from '@/interfaces/game.interface'
-export  type { IRequest } from '@/interfaces/common.interface'
+export  type { IAuthParams, IJwtToken, IRefreshTokenParams } from '@/interfaces/auth.interfaces'
+export  type { IGameIdParams } from '@/interfaces/game.interfaces'
+export  type { IRequest } from '@/interfaces/common.interfaces'
 

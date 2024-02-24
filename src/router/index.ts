@@ -2,18 +2,20 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { layoutMiddleware } from '@/router/loadLayout.middleware'
+import { EPageName, EPagePath, ELayoutsName, ELocalStoragesName } from '@/enums'
+import { getLocalStorage } from '@/utils/functions.utils'
 const routes: RouteRecordRaw[] = [
   {
-    path: '/home',
-    name: 'home',
+    path: EPagePath.home,
+    name: EPageName.home,
     component: HomeView,
-    meta: { layout: 'main', auth: true }
+    meta: { layout: ELayoutsName.main, auth: true }
   },
   {
-    path: '/auth',
-    name: 'auth',
+    path: EPagePath.auth,
+    name: EPageName.auth,
     component: () => import('../views/AuthView.vue'),
-    meta: { layout: 'auth' }
+    meta: { layout: ELayoutsName.auth }
   }
 ]
 const router = createRouter({
@@ -22,13 +24,12 @@ const router = createRouter({
 })
 router.beforeEach(layoutMiddleware)
 router.beforeEach((to, from, next) => {
-  const isAuthorization = localStorage.getItem('token')
+  const isAuthorization = getLocalStorage(ELocalStoragesName.token)
   const requireAuth = to.matched.some((record) => record.meta.auth)
-  console.log(requireAuth)
   if (requireAuth && !isAuthorization) {
-    next('/auth')
+    next(EPagePath.auth)
   } else if (!requireAuth && isAuthorization) {
-    next('/home')
+    next(EPagePath.home)
   } else {
     next()
   }

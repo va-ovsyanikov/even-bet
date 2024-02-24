@@ -1,33 +1,10 @@
-//     if (err.response.status === 401 && err.config && !err.config.__isRetryRequest) {
-//       console.log('Unauthorized')
-//       localStorage.removeItem('token')
-//       router.push({name: 'register'})
-//     } else {
-//       console.log('Authorized')
-//     }
-//   });
-// });
-
 import axios from 'axios'
+import { useAuthStore } from '@/stores'
 import type { IAuthParams, IRequest, IGameIdParams } from '@/interfaces'
+import { ELocalStoragesName } from '@/enums'
+import { getLocalStorage } from '@/utils/functions.utils'
 
-
-// import { notify } from '@kyvg/vue3-notification'
-// const baseURL = "https://dev.rxongo.com/api/"
-// axios.defaults.baseURL = baseURL;
-// axios.defaults.withCredentials = false;
-
-// axios.interceptors.request.use(
-//     (config) => {
-//         const token = localStorage.getItem('token')
-//         if (token) {
-//             config.headers.Authorization = `Bearer ${token}`;
-//         }
-//         return config;
-//     },
-//     (error) => Promise.reject(error)
-// );
-const baseURL = 'https://poker.evenbetpoker.com/api/web/v2'
+const baseURL = 'https://poker.evenbetpoker.com/api/web'
 axios.defaults.baseURL = baseURL
 axios.defaults.withCredentials = false
 axios.interceptors.request.use(
@@ -41,18 +18,18 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// axios.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response.status === 401) {
-//       const newToken = await refreshToken();
-//       localStorage.setItem('authToken', newToken);
-//       Retry the original request
-//       return axios(error.config)
-//     }
-//     return Promise.reject(error)
-//   }
-// )
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const date: number = getLocalStorage(ELocalStoragesName.lifeTime)
+    if (date !== 0 && date * 1000 < new Date().getTime() + date * 1000) {
+      const store = useAuthStore()
+      const { checkToken } = store
+      checkToken()
+    }
+    return Promise.reject(error)
+  }
+)
 
 export const request = async (data: IRequest<IAuthParams | IGameIdParams>): Promise<any> => {
   const response = await axios({
