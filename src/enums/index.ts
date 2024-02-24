@@ -1,0 +1,1 @@
+export {EApiURL, EApiMethods, ELocalStorages } from '@/enums/auth.enums'

@@ -9,8 +9,9 @@
 // });
 
 import axios from 'axios'
-import type { IAuthParams } from '@/interface/auth.interface'
-import type { IRequest } from '@/interface/common.interface'
+import type { IAuthParams, IRequest, IGameIdParams } from '@/interfaces'
+
+
 // import { notify } from '@kyvg/vue3-notification'
 // const baseURL = "https://dev.rxongo.com/api/"
 // axios.defaults.baseURL = baseURL;
@@ -53,11 +54,11 @@ axios.interceptors.request.use(
 //   }
 // )
 
-export const request = async (data: IRequest<IAuthParams>): Promise<any> => {
+export const request = async (data: IRequest<IAuthParams | IGameIdParams>): Promise<any> => {
   const response = await axios({
     method: data.method,
     url: data.url,
-    data: data.body
+    data: data.params
   })
   return response.data
 }

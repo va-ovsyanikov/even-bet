@@ -1,17 +1,18 @@
 import { defineStore } from 'pinia'
 import { gamesFetch, gameIdFetch } from '@/services/game.services'
 import { notify } from '@kyvg/vue3-notification'
+import type { IGameIdParams } from '@/interfaces'
 
 export const useGameStore = defineStore('game', {
   state: () => ({
-    games: [],
-    gameId: {}
+    gameList: [],
+    gameLink: ''
   }),
   actions: {
     async gamesListFetch() {
       try {
         const response = await gamesFetch()
-        this.games = response.data
+        this.gameList = response.data
         console.log(response)
       } catch (errors: any) {
         notify({
@@ -20,10 +21,10 @@ export const useGameStore = defineStore('game', {
         })
       }
     },
-    async gameOneFetch() {
+    async gameOneFetch(params: IGameIdParams) {
       try {
-        const response = await gameIdFetch('2')
-        console.log(response)
+        const response = await gameIdFetch(params)
+        this.gameLink = response.data[0].attributes['launch-options']['game-url'] as string
       } catch (errors: any) {
         notify({
           type: 'error',
@@ -32,7 +33,7 @@ export const useGameStore = defineStore('game', {
       }
     }
   },
-  // getters: {
-  //   getGames: (state) => state.games
-  // }
+  getters: {
+    getGameLink: (state) => state.gameLink
+  }
 })

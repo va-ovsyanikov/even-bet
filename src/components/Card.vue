@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import { toRefs, watch } from 'vue'
+import { useGameStore } from '@/stores/game'
+import type { IGameIdParams } from '@/interface'
+
+const store = useGameStore()
+
+const { gameOneFetch } = store
+const { gameLink } = toRefs(store)
+
+const props = defineProps({
+  id: {
+    type: String,
+    default: ''
+  },
+  image: {
+    type: String,
+    default: ''
+  },
+  title: {
+    type: String,
+    default: ''
+  }
+})
+const openGame = () => {
+  const params: IGameIdParams = {
+    clientId: 'default',
+    gameId: String(props.id)
+  }
+  gameOneFetch(params)
+}
+watch(gameLink, (link) => {
+  window.open(link, '_blank')
+})
+</script>
+
+<template>
+  <div class="card w-[15.6%]">
+    <div class="card-image">
+      <img class="h-[13rem]" :src="image" />
+    </div>
+    <div class="card-action cursor-pointer" @click="openGame">{{ title }}</div>
+  </div>
+</template>

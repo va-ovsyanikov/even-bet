@@ -10,12 +10,6 @@ const routes: RouteRecordRaw[] = [
     meta: { layout: 'main', auth: true }
   },
   {
-    path: '/game',
-    name: 'game',
-    component: () => import('../views/GameView.vue'),
-    meta: { layout: 'main', auth: true }
-  },
-  {
     path: '/auth',
     name: 'auth',
     component: () => import('../views/AuthView.vue'),

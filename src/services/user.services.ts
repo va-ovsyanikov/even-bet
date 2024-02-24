@@ -1,7 +1,14 @@
 import { request } from './api.services'
-import type { IAuthParams } from '@/interface/auth.interface'
-import { EApiURL, EApiMethods } from '@/enums/enums.api'
-import type { IRequest } from '@/interface/common.interface'
+import { EApiURL, EApiMethods } from '@/enums'
+import { getDynamicUrl } from '@/utils/functions.utils'
+import { getLocalStorage } from '@/utils/functions.utils'
+import type { IAuthParams, IRequest } from '@/interfaces'
 
-export const userFetch = () =>
-  request({ url: EApiURL.games, method: EApiMethods.GET } as unknown as IRequest<IAuthParams>)
+export const userFetch = () => {
+  if (getLocalStorage('token')) {
+    return request({
+      url: getDynamicUrl(EApiURL.user, [getLocalStorage('token')]),
+      method: EApiMethods.GET
+    } as unknown as IRequest<IAuthParams>)
+  }
+}
