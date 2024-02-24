@@ -21,7 +21,7 @@
 import { ref } from 'vue'
 import { useNotification } from "@kyvg/vue3-notification";
 
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores'
 import type { IAuthParams } from '@/interface'
 const store = useAuthStore()
 const { logIn } = store
@@ -49,4 +49,3 @@ const handleSubmit = (e: any) => {
 </script>
 
 <style scoped></style>
-@/interfaces

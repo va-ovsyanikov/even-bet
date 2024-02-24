@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores'
 const sidenav = ref<any>(null)
 
 const store = useUserStore()

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import { useGameStore } from '@/stores/game'
+import { useGameStore } from '@/stores'
 import Card from '@/components/Card.vue'
 import NavBar from '@/components/NavBar.vue'
 
