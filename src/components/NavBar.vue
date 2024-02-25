@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import { onMounted, ref, toRefs } from 'vue'
+import { onMounted, onUnmounted, ref, toRefs } from 'vue'
 import { useUserStore } from '@/stores'
 const sidenav = ref<any>(null)
+const time  = ref(0)
 
 const store = useUserStore()
 const { userDataFetch } = store
 const { user } = toRefs(store)
 
-// const user = computed(() => store.user)
+ time.value = setInterval(() => {
+  userDataFetch()
+}, 30000)
+
+onUnmounted(()=> {
+  clearInterval(time.value)
+})
 
 onMounted(() => {
   userDataFetch()

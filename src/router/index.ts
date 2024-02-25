@@ -1,9 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 import { layoutMiddleware } from '@/router/loadLayout.middleware'
 import { EPageName, EPagePath, ELayoutsName, ELocalStoragesName } from '@/enums'
 import { getLocalStorage } from '@/utils/functions.utils'
+
 const routes: RouteRecordRaw[] = [
   {
     path: EPagePath.home,
