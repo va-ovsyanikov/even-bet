@@ -35,7 +35,7 @@ watch(gameLink, (link) => {
 </script>
 
 <template>
-  <div class="card w-[15.6%]">
+  <div class="card !m-0">
     <div class="card-image">
       <img class="h-[13rem]" :src="image" />
     </div>

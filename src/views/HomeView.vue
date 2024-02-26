@@ -5,6 +5,7 @@ import Paginate from 'vuejs-paginate-next'
 import { useGameStore } from '@/stores'
 import CardGame from '@/components/CardGame.vue'
 import SideBar from '@/components/SideBar.vue'
+import PreloaderData from '@/components/PreloaderData.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -53,8 +54,12 @@ const getPageCount = computed(() => {
     >
       <i class="material-icons">menu</i>
     </button>
+    <PreloaderData v-if="!getGameList.length" />
     <div class="flex flex-col justify-between h-[calc(100vh-2.9rem)]">
-      <div class="flex flex-wrap gap-x-4 m-2">
+      <div
+        v-if="getGameList.length"
+        class="grid  lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-4 mx-2 my-4 grid-cols-2"
+      >
         <CardGame
           v-for="{ id, attributes } in getGameList"
           :key="id"
@@ -97,12 +102,14 @@ const getPageCount = computed(() => {
 .page__item.active
   .page__link
     background-color: #ee6e73
-    border-radius: 2px
+    border-radius: 0.2rem
     color: #fff
 .page__link
-  padding: 3px 8px
+  padding: 0.3rem 0.7rem
   cursor: pointer
   color: #000
+  @media screen and (max-width: 42rem)
+    padding:  0.3rem 0.35rem
 .page__link__prev,
 .page__link__next
   padding: 10px
