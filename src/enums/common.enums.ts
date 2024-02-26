@@ -5,6 +5,6 @@ export enum ELocalStoragesName {
 }
 
 export enum ELayoutsName{
-  main = 'main',
-  auth = 'auth'
+  main = 'Main',
+  auth = 'Auth'
 }
