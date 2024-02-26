@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-[100vh] flex justify-center items-center">
-    <form @submit.prevent="handleSubmit" class="w-[30rem] mx-auto">
+  <div class="h-[100vh] flex justify-center items-center">
+    <form @submit.prevent="handleSubmit" class="sm:w-[30rem] w-[90%]">
       <div class="input-field">
         <input type="text" v-model.trim="name" />
         <label for="login">Name</label>
@@ -11,7 +11,7 @@
       </div>
       <button class="btn waves-effect waves-light" type="submit" name="action">
         Login
-        <i class="material-icons right">send</i>
+        <i class="material-icons right">exit_to_app</i>
       </button>
     </form>
   </div>

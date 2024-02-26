@@ -2,17 +2,17 @@
 import { onMounted, onUnmounted, ref, toRefs } from 'vue'
 import { useUserStore } from '@/stores'
 const sidenav = ref<any>(null)
-const time  = ref(0)
+const time = ref(0)
 
 const store = useUserStore()
 const { userDataFetch } = store
 const { user } = toRefs(store)
 
- time.value = setInterval(() => {
+time.value = setInterval(() => {
   userDataFetch()
 }, 30000)
 
-onUnmounted(()=> {
+onUnmounted(() => {
   clearInterval(time.value)
 })
 
@@ -24,19 +24,11 @@ onMounted(() => {
 
 <template>
   <aside id="slide-out" class="sidenav" ref="sidenav">
-    {{ user }}
-    <!-- id: {{ user[0].id }} 
-    Balance: {{ user[0].attributes.available
-    }}{{ user[0].attributes.currency }} 
-    Bonus: {{ user[0].attributes.bonus }} -->
-    <!-- <ul>
-      <li>
-        <a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a>
-      </li>
-      <li><a href="#!">Second Link</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Subheader</a></li>
-      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-    </ul> -->
+    <img src="/avatar.jpg" alt="avatar"/>
+    <div class="pl-2 pt-2">
+      <strong>id:</strong> {{ user[0]?.id }}<br />
+      <strong>Balance:</strong> {{ user[0]?.attributes.available }}{{ user[0]?.attributes.currency }} <br />
+      <strong>Bonus:</strong> {{ user[0]?.attributes.bonus }}
+    </div>
   </aside>
 </template>

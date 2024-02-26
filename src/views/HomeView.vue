@@ -20,8 +20,7 @@ onMounted(() => {
       class="btn waves-effect waves-light sidenav-trigger absolute left-2 top-2"
       data-target="slide-out"
     >
-      Side data
-      <i class="material-icons right">menu</i>
+      <i class="material-icons">menu</i>
     </button>
     <div class="flex flex-wrap gap-x-4 m-2">
       <CardGame
