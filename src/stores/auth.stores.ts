@@ -9,7 +9,7 @@ import { ELocalStoragesName, EApiMethods, EApiURL } from '@/enums'
 
 export const useAuthStore = defineStore('auth', {
   actions: {
-    async logIn(params: IAuthParams) {
+    async logIn(params: IAuthParams):Promise<void> {
       try {
         const response = await authentication(params)
         if (response) {
@@ -36,9 +36,8 @@ export const useAuthStore = defineStore('auth', {
         })
       }
     },
-    async checkToken() {
+    async checkToken():Promise<void> {
       try {
-        console.log('2222222222222')
         const refreshToken = getLocalStorage(ELocalStoragesName.refreshToken)
         if (refreshToken) {
           const params: IRefreshTokenParams = {

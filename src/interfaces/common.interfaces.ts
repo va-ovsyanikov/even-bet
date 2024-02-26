@@ -3,4 +3,9 @@ export interface IRequest<T = any> {
   method: string
   params?: T
 }
-
+export interface IMixedObject{ 
+  [key: string]: any 
+};
+export interface IGenericObject<T>{ 
+  [key: string]: T 
+};

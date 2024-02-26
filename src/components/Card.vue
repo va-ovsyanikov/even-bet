@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toRefs, watch } from 'vue'
 import { useGameStore } from '@/stores'
-import type { IGameIdParams } from '@/interface'
+import type { IGameIdParams } from '@/interfaces'
 
 const store = useGameStore()
 
