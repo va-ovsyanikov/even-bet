@@ -1,4 +1,4 @@
-import { request } from './api.services'
+import { request } from '@/services/generic.services'
 import { EApiURL, EApiMethods } from '@/enums'
 import type { IAuthParams, IRequest } from '@/interfaces'
 

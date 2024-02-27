@@ -1,4 +1,4 @@
-import { request } from './api.services'
+import { request } from '@/services/generic.services'
 import type { IAuthParams, IRequest, IGameIdParams } from '@/interfaces'
 import { EApiURL, EApiMethods } from '@/enums'
 import { getDynamicUrl } from '@/utils/functions.utils'

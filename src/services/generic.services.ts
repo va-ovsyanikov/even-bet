@@ -6,8 +6,7 @@ import { ELocalStoragesName, EPageName } from '@/enums'
 import { getLocalStorage, removeLocalStorage } from '@/utils/functions.utils'
 
 // 'https://poker.evenbetpoker.com/api/web'
-const baseURL = import.meta.env.VITE_APP_API_URL
-axios.defaults.baseURL = baseURL
+axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL
 axios.defaults.withCredentials = false
 axios.interceptors.response.use(
   (response) => {
