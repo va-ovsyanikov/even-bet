@@ -39,6 +39,6 @@ watch(gameLink, (link) => {
     <div class="card-image">
       <img class="h-[13rem]" :src="image" />
     </div>
-    <div class="card-action cursor-pointer" @click="openGame">{{ title }}</div>
+    <div class="card-action cursor-pointer !h-[3.7rem] !py-0 flex justify-center items-center" @click="openGame">{{ title }}</div>
   </div>
 </template>
