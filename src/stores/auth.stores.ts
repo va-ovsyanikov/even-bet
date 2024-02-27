@@ -5,7 +5,7 @@ import { authentication } from '@/services'
 import { notify } from '@kyvg/vue3-notification'
 import { setLocalStorage, getLocalStorage } from '@/utils/functions.utils'
 import type { IAuthParams, IJwtToken, IRefreshTokenParams } from '@/interfaces'
-import { ELocalStoragesName, EApiMethods, EApiURL } from '@/enums'
+import { ELocalStoragesName, EApiMethods, EApiURL, EPageName } from '@/enums'
 
 export const useAuthStore = defineStore('auth', {
   actions: {
@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', {
             (new Date().getTime() +
               (response.data[0].attributes['life-time'] - 100) * 1000) as number
           )
-          router.push({ name: 'home' })
+          router.push({ name: EPageName.main })
           notify({
             type: 'success',
             title: 'You have been logged in!'

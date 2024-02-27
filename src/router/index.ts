@@ -7,8 +7,8 @@ import { getLocalStorage } from '@/utils/functions.utils'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: EPagePath.home,
-    name: EPageName.home,
+    path: EPagePath.main,
+    name: EPageName.main,
     component: HomeView,
     meta: { layout: ELayoutsName.main, auth: true }
   },
@@ -17,7 +17,13 @@ const routes: RouteRecordRaw[] = [
     name: EPageName.auth,
     component: () => import('../views/AuthView.vue'),
     meta: { layout: ELayoutsName.auth }
-  }
+  },
+  {
+    path: EPagePath.random,
+    redirect: {
+      name: EPageName.main,
+    },
+  },
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +36,7 @@ router.beforeEach((to, from, next) => {
   if (requireAuth && !isAuthorization) {
     next(EPagePath.auth)
   } else if (!requireAuth && isAuthorization) {
-    next(EPagePath.home)
+    next(EPagePath.main)
   } else {
     next()
   }
