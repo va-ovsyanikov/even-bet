@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+// @ts-ignore: Unreachable code error
 import Paginate from 'vuejs-paginate-next'
 import { useGameStore } from '@/stores'
 import CardGame from '@/components/CardGame.vue'
