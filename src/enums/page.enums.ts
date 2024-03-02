@@ -1,9 +1,9 @@
-export enum EPageName{
+export enum EPageName {
   main = 'main',
-  auth = 'auth'
+  auth = 'auth',
 }
-export enum EPagePath{
+export enum EPagePath {
   main = '/',
   auth = '/auth',
-  random = '/:pathMatch(.*)*'
+  random = '/:pathMatch(.*)*',
 }

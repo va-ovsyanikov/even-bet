@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { onMounted } from 'vue'
-const route = useRoute()
-import M from 'materialize-css'
+import { useRoute } from 'vue-router';
+import { onMounted } from 'vue';
+const route = useRoute();
+import M from 'materialize-css';
 
 onMounted(() => {
-  M.AutoInit()
-})
+  M.AutoInit();
+});
 </script>
 
 <template>
@@ -16,5 +16,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

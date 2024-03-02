@@ -1,10 +1,10 @@
-import { type IMixedObject } from '@/interfaces'
+import { type IMixedObject } from '@/interfaces';
 
 export interface IGameState {
-  gameList: IMixedObject[]
-  gameLink: string
+  gameList: IMixedObject[];
+  gameLink: string;
 }
 export interface IGameIdParams {
-  clientId: string
-  gameId: string
+  clientId: string;
+  gameId: string;
 }

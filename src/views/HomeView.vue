@@ -1,65 +1,60 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router';
+import { computed, onMounted, ref, watch } from 'vue';
 // @ts-ignore: Unreachable code error
-import Paginate from 'vuejs-paginate-next'
-import { useGameStore } from '@/stores'
-import CardGame from '@/components/CardGame.vue'
-import SideBar from '@/components/SideBar.vue'
-import PreloaderData from '@/components/PreloaderData.vue'
+import Paginate from 'vuejs-paginate-next';
+import { useGameStore } from '@/stores';
+import PreloaderData from '@/components/PreloaderData.vue';
+import CardGame from '@/components/CardGame.vue';
+import SideBar from '@/components/SideBar.vue';
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
-const store = useGameStore()
-const { gamesListFetch } = store
+const store = useGameStore();
+const { gamesListFetch } = store;
 
-const perPage = ref(12)
-const currentPage = ref(0)
+const perPage = ref(12);
+const currentPage = ref(0);
 
-const gameList = computed(() => store.gameList)
+const gameList = computed(() => store.gameList);
 onMounted(() => {
-  gamesListFetch()
-})
-const pageQuery = computed(() => route.query.page)
-watch(
-  pageQuery,
-  (newPageQuery) => (currentPage.value = newPageQuery === undefined ? 1 : Number(newPageQuery)),
-  { immediate: true }
-)
+  gamesListFetch();
+});
+const pageQuery = computed(() => route.query.page);
+watch(pageQuery, newPageQuery => (currentPage.value = newPageQuery === undefined ? 1 : Number(newPageQuery)), {
+  immediate: true,
+});
 
 const changePage = (pageNum: number) => {
   if (pageNum === 1) {
-    router.push(route.path)
+    router.push(route.path);
   } else {
-    router.push(`${route.path}?page=${pageNum}`)
+    router.push(`${route.path}?page=${pageNum}`);
   }
-  currentPage.value = Number(pageNum)
-}
+  currentPage.value = Number(pageNum);
+};
 const getGameList = computed(() => {
-  let current = currentPage.value * perPage.value
-  let start = current - perPage.value
-  return [...gameList.value].slice(start, current)
-})
+  const current = currentPage.value * perPage.value;
+  const start = current - perPage.value;
+  return [...gameList.value].slice(start, current);
+});
 const getPageCount = computed(() => {
-  return Math.ceil(gameList.value.length / perPage.value)
-})
+  return Math.ceil(gameList.value.length / perPage.value);
+});
 </script>
 
 <template>
   <main>
     <SideBar />
-    <button
-      class="btn waves-effect waves-light sidenav-trigger absolute left-2 top-2"
-      data-target="slide-out"
-    >
+    <button class="btn waves-effect waves-light sidenav-trigger absolute left-2 top-2" data-target="slide-out">
       <i class="material-icons">menu</i>
     </button>
     <PreloaderData v-if="!getGameList.length" />
     <div class="flex flex-col justify-between h-[calc(100vh-2.9rem)]">
       <div
         v-if="getGameList.length"
-        class="grid  lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-4 mx-2 my-4 grid-cols-2"
+        class="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-4 mx-2 my-4 grid-cols-2"
       >
         <CardGame
           v-for="{ id, attributes } in getGameList"
