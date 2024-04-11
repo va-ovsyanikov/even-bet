@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.2.0",
+    "@sentry/browser": "^7.109.0",
+    "@sentry/node": "^7.109.0",
+    "@sentry/vue": "^7.109.0",
     "autoprefixer": "^10",
     "axios": "^1.6.7",
     "material-design-icons": "^3.0.1",

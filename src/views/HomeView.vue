@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router';
 import { computed, onMounted, ref, watch } from 'vue';
+import * as Sentry from '@sentry/vue';
 // @ts-ignore: Unreachable code error
 import Paginate from 'vuejs-paginate-next';
 import { useGameStore } from '@/stores';
@@ -33,6 +34,7 @@ const changePage = (pageNum: number) => {
     router.push(`${route.path}?page=${pageNum}`);
   }
   currentPage.value = Number(pageNum);
+  throw new Error('Sentry error');
 };
 const getGameList = computed(() => {
   const current = currentPage.value * perPage.value;
