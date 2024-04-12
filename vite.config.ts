@@ -15,10 +15,19 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id: any) {
-          if (id.includes('node_modules')) {
-            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+        /**
+         * Generates manual chunks for Vite's build step.
+         *
+         * @param {string} moduleId - The ID of the module.
+         * @return {string | undefined} The name of the chunk, or undefined if the module should not be chunked.
+         */
+        manualChunks(moduleId: string): string | undefined {
+          const modulePath = moduleId.split('node_modules/');
+          if (modulePath.length > 1) {
+            const [chunkName] = modulePath[1].split('/');
+            return chunkName;
           }
+          return undefined;
         },
       },
     },
