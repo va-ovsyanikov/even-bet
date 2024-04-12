@@ -12,7 +12,7 @@ dotenv.config();
 */
 const sentryConfig: ViteSentryPluginOptions = {
   authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
-  url: process.env.VITE_SENTRY_API_BASE_URL,
+  url: process.env.VITE_SENTRY_BASE_URL,
   org: process.env.VITE_SENTRY_ORG,
   project: process.env.VITE_SENTRY_PROJECT,
   release: '1.0',
